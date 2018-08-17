@@ -1,4 +1,9 @@
-# ngx-chartsjs [![npm version](https://badge.fury.io/js/%40reibo%2Fngx-chartjs.svg)](https://badge.fury.io/js/%40reibo%2Fngx-chartjs) [![npm downloads](https://img.shields.io/npm/dm/@reibo/ngx-chartjs.svg)](https://npmjs.org/@reibo/ngx-chartjs) 
+# ngx-chartjs 
+[![npm](https://img.shields.io/npm/v/%40reibo%2Fngx-chartjs.svg?style=flat-square)](https://www.npmjs.com/package/%40reibo%2Fngx-chartjs)
+![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)
+[![npm](https://img.shields.io/npm/dt/%40reibo%2Fngx-chartjs.svg?style=flat-square)](https://www.npmjs.com/package/%40reibo%2Fngx-chartjs)
+
+
 Beautiful charts for Angular 2,4,5,6 based on Chart.js
 
 ## Usage
