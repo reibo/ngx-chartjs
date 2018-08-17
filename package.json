@@ -1,6 +1,7 @@
 {
   "name": "ngx-chartjs",
   "version": "0.0.0",
+  "description": "Reactive, responsive, beautiful charts for Angular based on Chart.js. All options available there are also available",
   "scripts": {
     "code-style": "pretty-quick --staged",
     "precommit": "yarn code-style",
@@ -11,6 +12,25 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "charts:pack": "ng build --prod ngx-chartjs && cd dist/ngx-chartjs  && npm pack && cd ../.."
+  },
+  "keywords": [
+    "angular",
+    "chart.js",
+    "angular2",
+    "angular4",
+    "angular5",
+    "angular6",
+    "angularjs",
+    "charts"
+  ],
+  "license": "MIT",
+  "author": "Bo Vandersteene <bo@reibo.be>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bovandersteene/-reibo-ngx-chartjs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bovandersteene/-reibo-ngx-chartjs/issues"
   },
   "husky": {
     "hooks": {
