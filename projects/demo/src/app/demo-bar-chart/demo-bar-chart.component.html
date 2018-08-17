@@ -1,0 +1,12 @@
+<div>
+  <div style="width: 75%;">
+    <ngx-charts
+      [datasets]="data"
+      [labels]="labels"
+      [options]="options"
+      [legend]="legend"
+      [colors]="chartColors"
+      [chartType]="chartType"></ngx-charts>
+  </div>
+  <button (click)="randomize()">Update</button>
+</div>

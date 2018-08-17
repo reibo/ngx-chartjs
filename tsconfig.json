@@ -16,6 +16,11 @@
     "lib": [
       "es2017",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@reibo/ngx-chartjs": [
+        "./projects/ngx-chartjs/src/public_api.ts"
+      ]
+    }
   }
 }

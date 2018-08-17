@@ -1,0 +1,10 @@
+{
+  "name": "@reibo/ngx-chartjs",
+  "author": "bo@reibo.io",
+  "version": "0.0.5",
+  "peerDependencies": {
+    "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
+    "@angular/core": "^6.0.0-rc.0 || ^6.0.0",
+    "chart.js": "^2.7.2"
+  }
+}
