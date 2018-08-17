@@ -4,6 +4,8 @@
 [![npm](https://img.shields.io/npm/dt/%40reibo%2Fngx-chartjs.svg?style=flat-square)](https://www.npmjs.com/package/%40reibo%2Fngx-chartjs)
 
 
+[![CircleCI](https://img.shields.io/circleci/project/github/bovandersteene/-reibo-ngx-chartjs.svg)](https://circleci.com/gh/bovandersteene/-reibo-ngx-chartjs)
+
 Beautiful charts for Angular 2,4,5,6 based on Chart.js
 
 ## Usage

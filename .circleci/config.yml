@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       - image: circleci/node:7.10
-    working_directory: ~/project
+    working_directory: ~/
 
     steps:
         # Log the current branch
