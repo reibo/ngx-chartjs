@@ -5,6 +5,10 @@
 
 
 [![CircleCI](https://img.shields.io/circleci/project/github/bovandersteene/-reibo-ngx-chartjs.svg)](https://circleci.com/gh/bovandersteene/-reibo-ngx-chartjs)
+[![CircleCI](https://img.shields.io/codecov/c/github/bovandersteene/-reibo-ngx-chartjs.svg)](https://codecov.io/gh/bovandersteene/-reibo-ngx-chartjs)
+
+
+[![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 Beautiful charts for Angular 2,4,5,6 based on Chart.js
 
