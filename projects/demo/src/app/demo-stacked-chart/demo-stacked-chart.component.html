@@ -1,14 +1,15 @@
 <div>
   <div>
     <ngx-charts
-      [beginAtZero]="beginAtZero"
+      [stacked]="true"
       [datasets]="data"
       [labels]="labels"
       [options]="options"
       [legend]="legend"
-      [datalabels]="false"
+      [colors]="chartColors"
       [chartType]="chartType"></ngx-charts>
   </div>
   <button (click)="randomize()">Update</button>
-  <button (click)="toggleBeginAtZero()">Toggle Begin at zero</button>
+  <button (click)="updateLabels()">Update labels</button>
+  <button (click)="updateYAxis()">Update y axis</button>
 </div>

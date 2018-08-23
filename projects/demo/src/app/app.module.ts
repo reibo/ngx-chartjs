@@ -4,11 +4,15 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {DemoBarChartComponent} from './demo-bar-chart/demo-bar-chart.component';
 import {ChartsModule} from '@reibo/ngx-chartjs';
+import { DemoStackedChartComponent } from './demo-stacked-chart/demo-stacked-chart.component';
+import { DemoPieChartComponent } from './demo-pie-chart/demo-pie-chart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DemoBarChartComponent
+    DemoBarChartComponent,
+    DemoStackedChartComponent,
+    DemoPieChartComponent
   ],
   imports: [
     BrowserModule,

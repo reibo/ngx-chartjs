@@ -32,26 +32,6 @@ export class DemoBarChartComponent implements OnInit {
     borderWidth: 1,
     data: []
   }];
-
-  readonly chartColors = [
-    {
-      // primary
-      backgroundColor: 'rgba(68,108,179,0.8)',
-      borderColor: 'rgba(68,108,179,1)',
-      pointBackgroundColor: 'rgba(68,108,179,1)',
-      pointBorderColor: '#446CB3',
-      pointHoverBackgroundColor: '#446CB3',
-      pointHoverBorderColor: 'rgba(148,159,177,0.2)',
-    },
-    {
-      // secondary
-      backgroundColor: 'rgba(46, 204, 113,0.8)',
-      borderColor: 'rgba(46, 204, 113,1)',
-      pointBackgroundColor: 'rgba(46, 204, 113,1)',
-      pointBorderColor: '#2ECC71',
-      pointHoverBackgroundColor: '#2ECC71',
-      pointHoverBorderColor: 'rgba(77,83,96,0.2)',
-    }];
   readonly labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   readonly options = {
     responsive: true,
@@ -64,11 +44,10 @@ export class DemoBarChartComponent implements OnInit {
     }
   };
 
-  readonly legend = {
-    position: 'top',
-  };
+  readonly legend = true;
 
   readonly chartType = 'bar';
+  beginAtZero: boolean = false;
 
   constructor() {
   }
@@ -82,7 +61,9 @@ export class DemoBarChartComponent implements OnInit {
       ...dataset,
       data: this.labels.map(() => randomScalingFactor())
     }));
-    console.log(this.data);
   }
 
+  toggleBeginAtZero(){
+    this.beginAtZero = !this.beginAtZero;
+  }
 }

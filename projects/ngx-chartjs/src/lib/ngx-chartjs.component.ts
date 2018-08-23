@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 
 import {Chart, ChartDataSets, ChartOptions} from 'chart.js';
 
@@ -10,7 +10,7 @@ import {Chart, ChartDataSets, ChartOptions} from 'chart.js';
   `,
   styleUrls: ['./charts.component.css']
 })
-export class ChartsComponent implements OnInit, OnDestroy {
+export class ChartsComponent implements OnInit, OnDestroy, OnChanges {
   @Input() options: ChartOptions = {};
   @Input() chartType: string;
   @Input() colors: Array<any>;
@@ -24,8 +24,10 @@ export class ChartsComponent implements OnInit, OnDestroy {
 
   private chart: Chart;
   private chartOptions: any;
+  private localOptions: any = {scales: {xAxes: [{}], yAxes: [{ticks: {}}]}};
   private _data: Array<ChartDataSets>;
-  private _labels: Array<any> = [];
+  private _pie: boolean;
+  @Input() labels: Array<string>;
 
   constructor() {
   }
@@ -42,30 +44,86 @@ export class ChartsComponent implements OnInit, OnDestroy {
     }
   }
 
-  @Input() set labels(labels: Array<any>) {
-    this._labels = labels;
-    if (this.data) {
-      if (this.chart) {
-        this.ngOnDestroy();
-      }
-      this.buildChart();
-
+  @Input() set datalabels(datalabels: boolean | any){
+    if(!datalabels){
+      this.localOptions = {
+        ...this.localOptions,
+        plugins: {
+          datalabels: {
+            display: false,
+          },
+        },
+      };
+    }
+  }
+  @Input() set stacked(stacked: boolean) {
+    if (stacked) {
+      this.chartType = 'bar';
+      this.localOptions = {
+        ...this.localOptions,
+        scales: {
+          xAxes: this.localOptions.scales.yAxes.map(yAxes => ({...yAxes, stacked: true})),
+          yAxes: this.localOptions.scales.yAxes.map(yAxes => ({...yAxes, stacked: true}))
+        },
+      };
     }
   }
 
-  get labels() {
-    return this._labels;
+  @Input() set pie(pie: boolean) {
+    this._pie = pie;
+    if (pie) {
+      this.chartType = 'pie';
+      this.localOptions = {
+        ...this.localOptions,
+        scales: null,
+      };
+    }
+  }
+
+  get pie() {
+    return this._pie;
+  }
+
+  @Input() set beginAtZero(beginAtZero: boolean) {
+    this.localOptions = {
+      ...this.localOptions,
+      scales: {
+        ...this.localOptions.scales,
+        yAxes: this.localOptions.scales.yAxes.map(yAxes => ({...yAxes, ticks: {...yAxes.ticks, beginAtZero}}))
+      }
+    };
+  }
+
+  ngOnChanges(values: any): void {
+    if (values.datasets || values.label) {
+      if (!this.chart) {
+        this.buildChart();
+      } else {
+        this.updateChart();
+      }
+    }
+  }
+
+  @Input() set animation(animation: boolean | number) {
+    if (!animation) {
+      this.localOptions = {
+        ...this.localOptions,
+        animation: {
+          duration: 0
+        }
+      };
+    } else {
+      this.localOptions = {
+        ...this.localOptions,
+        animation: {
+          duration: animation
+        }
+      };
+    }
   }
 
   @Input() set datasets(data: Array<ChartDataSets>) {
     this._data = data;
-    if (data) {
-      if (this.chart) {
-        this.updateChart();
-      } else {
-        this.buildChart();
-      }
-    }
   }
 
   get data() {
@@ -89,15 +147,8 @@ export class ChartsComponent implements OnInit, OnDestroy {
       };
     }
 
-    let datasets = this.data;
-    if (this.colors && this.colors.length) {
-      datasets = this.data.map((dataset, index) => ({
-        ...dataset,
-        ... this.colors[index],
-      }));
-    }
-
     const options = {
+      ...this.localOptions,
       ...this.options,
       legend,
       hover: this.options.hover || {},
@@ -108,7 +159,7 @@ export class ChartsComponent implements OnInit, OnDestroy {
       type: this.chartType,
       data: {
         labels: this.labels,
-        datasets,
+        datasets: this.addColorsToDataset(this.data),
       },
       options,
     };
@@ -116,10 +167,30 @@ export class ChartsComponent implements OnInit, OnDestroy {
   }
 
   private updateChart(): void {
-    this.chartOptions.data.datasets.forEach((dataset, i) => {
-        dataset.data = this.data[i].data;
-      }
-    );
+    this.chartOptions.data.datasets = this.addColorsToDataset(this.data);
+    this.chartOptions.data.labels = this.labels;
     this.chart.update();
+  }
+
+  private addColorsToDataset(datasets: Array<any>): any {
+    if (datasets && this.colors && this.colors.length) {
+      return datasets.map((dataset, index) => {
+        let colors = this.colors[index];
+        if (this._pie) {
+          colors = {
+            backgroundColor: this.colors
+          };
+        } else if (!colors.backgroundColor) {
+          colors = {
+            backgroundColor: colors
+          };
+        }
+        return {
+          ...dataset,
+          ...colors
+        };
+      });
+    }
+    return datasets;
   }
 }
