@@ -1,7 +1,7 @@
 {
   "name": "@reibo/ngx-chartjs",
   "author": "bo@reibo.io",
-  "version": "0.0.12",
+  "version": "0.1.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bovandersteene/-reibo-ngx-chartjs.git"

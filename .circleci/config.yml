@@ -86,7 +86,7 @@ jobs:
       - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
       - run:
           name: pre-publish
-          command: cp README.md dist/reibo/ngrx-mock-test/README.md && cd dist/reibo/ngrx-mock-test
+          command: cp README.md dist/ngx-chartjs/README.md
       - run:
           name: publish
           command: npm publish --access=public --registry=https://registry.npmjs.org/ --folder dist/ngx-chartjs

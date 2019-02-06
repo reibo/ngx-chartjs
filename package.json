@@ -11,7 +11,9 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "lib:patch": "cd projects/ngx-chartjs && npm version patch && cd ../.."
+    "lib:patch": "cd projects/ngx-chartjs && npm version patch && cd ../..",
+    "lib:minor": "cd projects/ngx-chartjs && npm version minor && cd ../..",
+    "lib:major": "cd projects/ngx-chartjs && npm version major && cd ../.."
   },
   "keywords": [
     "angular",
