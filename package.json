@@ -30,10 +30,10 @@
   "author": "Bo Vandersteene <bo@reibo.be>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bovandersteene/-reibo-ngx-chartjs.git"
+    "url": "git+https://github.com/reibo/ngx-chartjs.git"
   },
   "bugs": {
-    "url": "https://github.com/bovandersteene/-reibo-ngx-chartjs/issues"
+    "url": "https://github.com/reibo/ngx-chartjs/issues"
   },
   "husky": {
     "hooks": {
