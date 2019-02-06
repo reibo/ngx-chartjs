@@ -4,8 +4,8 @@
 [![npm](https://img.shields.io/npm/dt/%40reibo%2Fngx-chartjs.svg?style=flat-square)](https://www.npmjs.com/package/%40reibo%2Fngx-chartjs)
 
 
-[![CircleCI](https://img.shields.io/circleci/project/github/bovandersteene/-reibo-ngx-chartjs.svg)](https://circleci.com/gh/bovandersteene/-reibo-ngx-chartjs)
-[![CircleCI](https://img.shields.io/codecov/c/github/bovandersteene/-reibo-ngx-chartjs.svg)](https://codecov.io/gh/bovandersteene/-reibo-ngx-chartjs)
+[![CircleCI](https://img.shields.io/circleci/project/github/reibo/ngx-chartjs.svg)](https://circleci.com/gh/reibo/ngx-chartjs)
+[![CircleCI](https://img.shields.io/codecov/c/github/reibo/ngx-chartjs.svg)](https://codecov.io/gh/reibo/ngx-chartjs)
 
 
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
