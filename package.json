@@ -11,7 +11,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "charts:pack": "ng build --prod ngx-chartjs && cd dist/ngx-chartjs  && npm pack && cd ../.."
+    "lib:patch": "cd projects/ngx-chartjs && npm version patch && cd ../.."
   },
   "keywords": [
     "angular",

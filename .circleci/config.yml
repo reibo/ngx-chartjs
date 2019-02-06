@@ -3,35 +3,111 @@
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
 version: 2
+
+anchor_1: &defaults
+  working_directory: /tmp/reibo
+  docker:
+    - image: circleci/node:10.9.0-stretch-browsers
+
+
 jobs:
-  build:
-    docker:
-      - image: circleci/node:10.9.0-stretch-browsers
-    working_directory: ~/repo
+  install:
+    <<: *defaults
 
     steps:
-      - checkout
-
-      # Download and cache dependencies
+      - checkout # special step to check out source code to working directory
       - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-      # Log the current branch
+          name: Restore node modules cache
+          key: node_modules-{{ checksum "package-lock.json" }}
       - run:
-          name: Show current branch
-          command: echo ${CIRCLE_BRANCH}
-      # Install project dependencies
-      - run:
-          name: Install local dependencies
-          command: yarn install
-
+          name: Install dependencies
+          command: |
+            if [ ! -d node_modules ]; then
+              sudo npm install -g npm@$NPM_VERSION
+              npm ci
+            fi
       - save_cache:
+          name: Save node modules cache
+          key: node_modules-{{ checksum "package-lock.json" }}
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-      # Install project dependencies
+
+  test:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore node modules cache
+          key: node_modules-{{ checksum "package-lock.json" }}
+      - restore_cache:
+          name: Restore build
+          key: build-{{ .Revision }}
+      - run: # run tests
+          name: test
+          command: npm test
+
+          # - store_artifacts: # special step to save test results as as artifact
+          # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
+      #    path: test-results.xml
+      #    prefix: tests
+     # - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
+      #    path: coverage
+      #    prefix: coverage
+     # - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
+     #     path: test-results.xml
+
+  build:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore node modules cache
+          key: node_modules-{{ checksum "package-lock.json" }}
+      - restore_cache:
+          name: Restore build
+          key: build-{{ .Revision }}
       - run:
-          name: Build project
-          command: yarn build
+          name: Create the build
+          command: npm run build
+      - save_cache:
+          name: Save build
+          key: build-{{ .Revision }}
+          paths:
+            - dist/ngx-chartjs
+
+  prod-publish:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore build
+          key: build-{{ .Revision }}
+      - run: git config user.name "Bo Vandersteene"
+      - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+      - run:
+          name: pre-publish
+          command: cp README.md dist/reibo/ngrx-mock-test/README.md && cd dist/reibo/ngrx-mock-test
+      - run:
+          name: publish
+          command: npm publish --access=public --registry=https://registry.npmjs.org/ --folder dist/ngx-chartjs
+     #
+     # - run: npm run lib:publish
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - install
+      #- test:
+         # requires:
+          #  - install
+      - build:
+          requires:
+           - install
+      - prod-publish:
+          requires:
+          #  - test
+            - build
+          filters:
+            branches:
+              only: master
