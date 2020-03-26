@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Prepare
-        run: yarn install --frozen-lockfile 
+        run: npm install --frozen-lockfile
       - name: Build planning
         run: |
           npm run build
