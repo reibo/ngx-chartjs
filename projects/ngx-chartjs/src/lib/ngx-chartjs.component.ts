@@ -19,7 +19,7 @@ export class ChartsComponent implements OnInit, OnDestroy, OnChanges {
   @Output() chartClick: EventEmitter<any> = new EventEmitter();
   @Output() chartHover: EventEmitter<any> = new EventEmitter();
 
-  @ViewChild('canvas')
+  @ViewChild('canvas', { static: true })
   canvas: ElementRef;
 
   private chart: Chart;

@@ -1,14 +1,14 @@
 {
   "name": "@reibo/ngx-chartjs",
   "author": "bo@reibo.io",
-  "version": "0.1.0",
+  "version": "9.0.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/reibo/ngx-chartjs.git"
   },
   "peerDependencies": {
-    "@angular/common": "^6.0.0 || ^7.0.0",
-    "@angular/core": "^6.0.0 || ^7.0.0",
-    "chart.js": "^2.7.2"
+    "@angular/common": "9.x.x",
+    "@angular/core": "9.x.x",
+    "chart.js": "2.9.x"
   }
 }
